@@ -1,36 +1,67 @@
 import Button from "../atoms/Buttons";
-import LoginForm from "./RegisterForm";
+import RegisterForm from "./RegisterForm";
 import BrandLogo from "../atoms/BrandLogo";
 import googleIcon from "../../img/icons/google-icon.png";
 import { Link } from "react-router-dom";
 
-export default function LoginCard() {
+export default function RegisterCard() {
   return (
     <div
       className="
-        w-full
-        max-w-[529px]
-        rounded-2xl
-        bg-[#181A1CA6]
+        mt-[130px]
+        md:mt[181px]
+        w-[306px]
+        h-[489px]
+        md:w-[529px]
+        md:h-[778px]
+        rounded-[8px]
+        bg-[#181A1CD6]
         backdrop-blur-xl
-        p-10
+        p-[24px]
+        md:p-[40px]
         text-white
         flex
         flex-col
-        gap-[37px]
+        gap-[20px]
+        md:gap-[37px]
         shadow-2xl
       "
     >
-      <div className="text-center">
-        <div className="flex justify-center mb-6">
-          <BrandLogo />
-        </div>
+      <div
+        className=" flex
+                      items-center
+                      justify-center
+                      w-[94px]
+                      h-[24px]
+                      md:w-[163px]
+                      md:h-[44px]
+                      gap-[4px]
+                      mx-auto
+                      "
+      >
+        <BrandLogo />
+      </div>
+      <div
+        className="w-[120px]
+                  h-[44px]
+                  md:w-[200px]
+                  md:h-[65px]
+                  flex
+                  flex-col
+                  items-center
+                  gap-[8px]
+                  mx-auto
+                  font-sans"
+      >
         <h3
           className="
-              font-sans
+              flex
+              items-center
+              justify-center
               font-bold
-              text-[32px]
-              leading-[35.2px]
+              text-[18px]
+              md:text-[32px]
+              leading-[110%]
               text-center
             "
         >
@@ -38,58 +69,66 @@ export default function LoginCard() {
         </h3>
         <p
           className="
-            font-sans
             font-normal
-            text-[16px]
-            leading-[22.4px]
+            text-[10px]
+            md:text-[16px]
+            leading-[140%]
             tracking-[0.2px]
             text-center
             text-white
           "
         >
-          Selamat datang!
+          Selamat datang datang!
         </p>
       </div>
 
-      <div className="flex flex-col gap-[6px]">
-        <LoginForm />
-
-        <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-[7px] md:gap-[12px]">
+        <RegisterForm />
+        <div className="flex justify-between items-center text-[10px] md:text-[16px]">
           <p
             className="
-                font-sans
-                font-normal
-                text-[16px]
-                leading-[22.4px]
-                tracking-[0.2px]
-                text-gray-300"
+            font-sans
+            font-normal
+            leading-[22.4px]
+            tracking-[0.2px]
+            text-gray-300
+          "
           >
-            Sudah punya akun?
+            Belum punya akun?
             <Link
               to="/login"
               className="
-                ml-1
-                font-medium
-                text-[16px]
-                leading-[22.4px]
-                tracking-[0.2px]
-                text-white
-                cursor-pointer"
+            ml-1
+            leading-[22.4px]
+            tracking-[0.2px]
+            text-white
+            cursor-pointer
+          "
             >
               Masuk
             </Link>
           </p>
         </div>
       </div>
+      <div className="flex flex-col gap-2 ">
+        <Button className="w-[258px] h-[30px] md:w-[449px] md:h-[50px] text-[10px] md:text-[16px]">
+          Daftar
+        </Button>
 
-      <div className="flex flex-col gap-2">
-        <Button>Daftar</Button>
+        <div className="text-center text-gray-400 text-[10px] md:text-[16px]">
+          Atau
+        </div>
 
-        <div className="text-center text-sm text-gray-400">Atau</div>
-
-        <Button variant="outline">
-          <div className="flex items-center justify-center gap-5">
-            <img src={googleIcon} alt="Google" className="w-5 h-5" />
+        <Button
+          className="w-[258px] h-[30px] md:w-[449px] md:h-[50px] text-[10px] md:text-[16px]"
+          variant="outline"
+        >
+          <div className="flex items-center justify-center gap-[11px] md:gap-[20px]">
+            <img
+              src={googleIcon}
+              alt="Google"
+              className="w-[10px] h-[10px] md:w-[18px] md:h-[18px]"
+            />
             <span>Daftar dengan Google</span>
           </div>
         </Button>

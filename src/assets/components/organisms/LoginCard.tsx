@@ -11,14 +11,14 @@ export default function LoginCard() {
         mt-[172px]
         md:mt[181px]
         w-[306px]
-        h-[420px]
+        h-[423px]
         md:w-[529px]
         md:h-[663px]
         rounded-[8px]
         bg-[#181A1CD6]
         backdrop-blur-xl
-        p-[40px]
-        md:p-10
+        p-[24px]
+        md:p-[40px]
         text-white
         flex
         flex-col
