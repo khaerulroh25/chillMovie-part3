@@ -12,7 +12,7 @@ import arrowRight from "../../img/icons/arrow-right.png";
 
 export default function TopRatingSection() {
   return (
-    <section className="w-[428px] h-[210px] md:w-[1440px] md:h-[512px]">
+    <section className="md:w-[1440px] md:h-[512px]">
       <h2 className="px-4 md:px-[80px] mb-[20px] text-[20px] md:text-[24px] font-semibold text-white">
         Rilis Baru
       </h2>
