@@ -1,24 +1,121 @@
+import Button from "../atoms/Buttons";
+import playIcon from "../../img/icons/Vector.png";
+import checkIcon from "../../img/icons/check.png";
+import chevronIcon from "../../img/icons/chevron-down.png";
+import addIcon from "../../img/icons/plus.png";
+
+type Movie = {
+  id: number;
+  image: string;
+};
+
 interface TopRatingCardProps {
+  id: number;
   image: string;
   badge?: "episode" | "top10";
+  myList?: Movie[];
+  onAddToMyList: (movie: Movie) => void;
 }
 
-export default function TopRatingCard({ image, badge }: TopRatingCardProps) {
+export default function TopRatingCard({
+  id,
+  image,
+  badge,
+  myList = [],
+  onAddToMyList,
+}: TopRatingCardProps) {
+  const isAdded = myList.some((item) => item.id === id);
   return (
     <div
       className="
+        group
         relative
+        overflow-visible
         w-[96px]
         h-[143px]
         md:w-[234px]
         md:h-[365px]
         shrink-0
         rounded-[4px]
-        overflow-hidden
         cursor-pointer
       "
     >
-      <img src={image} alt="" className="w-full h-full object-cover" />
+      <img
+        src={image}
+        alt=""
+        className="w-full h-full object-cover rounded-[4px]"
+      />
+
+      <div
+        className="
+          absolute
+          top-1/2
+          left-1/2
+          -translate-x-1/2
+          -translate-y-1/2
+          w-[300px]
+          h-[380px]
+          md:w-[408px]
+          md:h-[415px]
+          bg-[#181A1C]
+          shadow-2xl
+          opacity-0
+          scale-95
+          overflow-hidden
+          pointer-events-none
+          rounded-[20px]
+          transition-all duration-300
+          group-hover:opacity-100
+          group-hover:scale-100
+          group-hover:pointer-events-auto
+          z-50
+        "
+      >
+        <img src={image} className="w-[408px] h-[255px] object-cover" />
+
+        <div className="gap-[17px] p-[29px] ">
+          <div className="flex items-center  gap-4 mb-4">
+            <Button variant="icon" className=" bg-white hover:bg-gray-200">
+              <img src={playIcon} alt="Play" className="w-4 h-4" />
+            </Button>
+
+            <Button
+              variant="icon"
+              onClick={() => onAddToMyList({ id, image })}
+              className=" border border-white/30 hover:bg-white/10"
+            >
+              <img
+                src={isAdded ? checkIcon : addIcon}
+                alt="Tambah"
+                className="w-4 h-4"
+              />
+            </Button>
+
+            <Button
+              variant="icon"
+              className=" ml-auto border border-white/30 hover:bg-white/10"
+            >
+              <img src={chevronIcon} alt="Like" className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="flex gap-2 text-[16px] mt-1">
+            <span className="px-3 py-1 text-xs font-medium text-[#C1C2C4] bg-[#CDF1FF4D] rounded-full">
+              16+
+            </span>
+
+            <span className="text-white">16 Episode</span>
+          </div>
+
+          <div className="flex justify-between text-[18px] text-[#C1C2C4] mt-2">
+            <span>Misteri</span>
+            <span>•</span>
+            <span>Kriminal</span>
+            <span>•</span>
+            <span>Fantasi</span>
+          </div>
+        </div>
+      </div>
 
       {badge === "episode" && (
         <span className="absolute flex items-center justify-center gap-[2px] top-[8px] md:top-[16px] left-3 w-[44px] h-[14px] md:w-[104px] md:h-[28px] bg-[#1E40AF] text-white text-[6px] md:text-[14px] rounded-full ">

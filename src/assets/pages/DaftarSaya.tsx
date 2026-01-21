@@ -1,0 +1,155 @@
+import Navbar from "../components/organisms/Navbar";
+import Footer from "../components/organisms/Footer";
+import Button from "../components/atoms/Buttons";
+
+type Movie = {
+  id: number;
+  image: string;
+  isWatched?: boolean;
+};
+
+interface DaftarSayaProps {
+  myList: Movie[];
+  onRemove: (id: number) => void;
+  onToggleWatched: (id: number) => void;
+}
+
+export default function DaftarSaya({
+  myList,
+  onRemove,
+  onToggleWatched,
+}: DaftarSayaProps) {
+  return (
+    <div className="min-h-screen bg-black text-white font-sans">
+      <Navbar />
+
+      <div className="px-4 md:px-[80px] py-10">
+        <h1 className="text-[32px] font-bold mb-6">Daftar Saya</h1>
+
+        {myList.length === 0 ? (
+          <div className="flex flex-col items-center justify-center text-center ">
+            <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="size-10"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0 1 18 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0 1 18 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 0 1 6 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5"
+                />
+              </svg>
+            </div>
+
+            <h2 className="text-[20px] md:text-[24px] font-semibold mb-2">
+              Belum ada film di Daftar Saya
+            </h2>
+
+            <p className="text-gray-400 max-w-md mb-6">
+              Tambahkan film dan acara TV favorit Anda di sini agar mudah
+              ditemukan nanti.
+            </p>
+
+            <Button
+              variant="outline"
+              className="bg-white text-black hover:bg-gray-200 px-6 py-3"
+              onClick={() => (window.location.href = "/home")}
+            >
+              Jelajahi Film
+            </Button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {myList.map((movie) => (
+              <div
+                key={movie.id}
+                className="
+                        relative
+                        cursor-pointer
+                        rounded-md
+                        overflow-hidden
+                        transition-transform
+                        duration-300
+                        origin-center
+                        hover:scale-105
+                        hover:z-10
+                    "
+              >
+                <img
+                  src={movie.image}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+                <div
+                  className="
+                        absolute inset-0
+                        bg-black/60
+                        flex flex-col
+                        items-center
+                        justify-center
+                        gap-4
+                        opacity-0
+                        transition-opacity duration-300
+                        hover:opacity-100
+                        "
+                >
+                  <Button
+                    variant="icon"
+                    onClick={() => onRemove(movie.id)}
+                    className="group
+                               bg-transparent
+                               border-[2px]
+                              border-white/30
+                              hover:border-red-500
+                              hover:bg-red-500/10
+                                transform
+                                transition-all
+                                duration-200
+                                hover:scale-110"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-5
+                      text-white
+                                  transition-colors
+                                  group-hover:text-red-500
+                                "
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                      />
+                    </svg>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => onToggleWatched(movie.id)}
+                    className="
+                                text-sm
+                                px-4 py-2
+                                bg-white/10
+                                hover:bg-white/20
+                            "
+                  >
+                    {movie.isWatched ? "Sudah Ditonton" : "Belum Ditonton"}
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Footer />
+    </div>
+  );
+}

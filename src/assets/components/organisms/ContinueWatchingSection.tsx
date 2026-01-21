@@ -11,11 +11,11 @@ import arrowRight from "../../img/icons/arrow-right.png";
 export default function ContinueWatchingSection() {
   return (
     <section className="md:w-[1440px] md:h-[309px]">
-      <h2 className="px-4 md:px-[80px] mb-[20px] md:mb-[32px] text-[20px] md:text-[32px] font-semibold text-white">
+      <h2 className="px-4 md:px-[80px] mb-[20px] md:mb-[32px] ttext-[20px] md:text-[24px] font-semibold text-white">
         Melanjutkan Tonton Film
       </h2>
 
-      <div className="relative overflow-hidden pb-6">
+      <div className="relative overflow-hidden pb-[50px]">
         <Button
           variant="icon"
           className="

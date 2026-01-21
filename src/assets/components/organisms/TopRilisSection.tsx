@@ -17,7 +17,7 @@ export default function TopRatingSection() {
         Rilis Baru
       </h2>
 
-      <div className="relative overflow-hidden pb-[50px]">
+      <div className="relative overflow-hidden pb-[50px] pt-[50px]">
         <Button
           variant="icon"
           className="
@@ -40,7 +40,7 @@ export default function TopRatingSection() {
             gap-[16px]
             md:gap-[28px]
             overflow-x-auto
-            md:overflow-hidden
+            md:overflow-visible
             px-4
             md:ml-[80px]
             md:px-0

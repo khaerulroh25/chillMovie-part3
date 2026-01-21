@@ -5,14 +5,23 @@ import TopRatingSection from "../components/organisms/TopRatingSection";
 import TopTrandingSection from "../components/organisms/TopTrandingSection";
 import TopRilisSection from "../components/organisms/TopRilisSection";
 import Footer from "../components/organisms/Footer";
+type Movie = {
+  id: number;
+  image: string;
+  isWatched?: boolean;
+};
 
-export default function HomePage() {
+interface HomePageProps {
+  myList: Movie[];
+  onAddToMyList: (movie: Movie) => void;
+}
+export default function HomePage({ myList, onAddToMyList }: HomePageProps) {
   return (
     <div className="bg-black text-white font-sans md:w-[1440px] md:h-[2890px]">
       <Navbar />
       <HeroSection />
       <ContinueWatchingSection />
-      <TopRatingSection />
+      <TopRatingSection myList={myList} onAddToMyList={onAddToMyList} />
       <TopTrandingSection />
       <TopRilisSection />
       <Footer />
