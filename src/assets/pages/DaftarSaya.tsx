@@ -58,7 +58,7 @@ export default function DaftarSaya({
 
             <Button
               variant="outline"
-              className="bg-gray-200 text-gray-800 hover:bg-gray-200 hover:text-white font-bold px-6 py-3"
+              className="bg-gray-200 text-black  hover:bg-gray-800 hover:text-white font-bold px-6 py-3"
               onClick={() => (window.location.href = "/home")}
             >
               Jelajahi Film
