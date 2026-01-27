@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { deleteMovie } from "../../../services/api/movieApi";
+import { getMovies } from "../../../services/api/movieApi";
 
 import Button from "../atoms/Buttons";
 import playIcon from "../../img/icons/vector.png";
@@ -16,7 +18,7 @@ interface TopRatingCardProps {
   poster: string;
   badge?: "episode" | "top10";
   myList?: Movie[];
-  onAddToMyList: (movie: Movie) => void;
+  onAddToMyList: (movie: Movie) => Promise<string>;
 }
 
 export default function TopRatingCard({
@@ -26,6 +28,21 @@ export default function TopRatingCard({
   onAddToMyList,
 }: TopRatingCardProps) {
   const [added, setAdded] = useState(false);
+  const [apiId, setApiId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const syncWithApi = async () => {
+      const movies = await getMovies();
+      const found = movies.find((m: Movie) => m.poster === poster);
+
+      if (found) {
+        setAdded(true);
+        setApiId(found.id);
+      }
+    };
+
+    syncWithApi();
+  }, [poster]);
 
   return (
     <div className="relative shrink-0">
@@ -91,8 +108,15 @@ export default function TopRatingCard({
               <Button
                 variant="icon"
                 onClick={async () => {
-                  await onAddToMyList({ id, poster });
-                  setAdded(true);
+                  if (!added) {
+                    const newApiId = await onAddToMyList({ id, poster });
+                    setApiId(newApiId);
+                    setAdded(true);
+                  } else {
+                    await deleteMovie(apiId!);
+                    setApiId(null);
+                    setAdded(false);
+                  }
                 }}
                 className=" border border-white/30 hover:bg-white/10 p-2 md:p-3"
               >

@@ -15,7 +15,7 @@ type Movie = {
 };
 
 interface TopRilisSectionProps {
-  onAddToMyList: (movie: Movie) => void;
+  onAddToMyList: (movie: Movie) => Promise<string>;
 }
 
 export default function TopRatingSection({

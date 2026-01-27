@@ -16,7 +16,7 @@ type Movie = {
 };
 
 interface TopTrandingSectionProps {
-  onAddToMyList: (movie: Movie) => void;
+  onAddToMyList: (movie: Movie) => Promise<string>;
 }
 export default function TopRatingSection({
   onAddToMyList,

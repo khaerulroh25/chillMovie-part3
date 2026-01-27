@@ -1,6 +1,12 @@
 import axiosInstance from "./axiosInstance";
+type Movie = {
+  id: string;
+  title?: string;
+  poster: string;
+  watched?: boolean;
+};
 
-export const getMovies = async () => {
+export const getMovies = async (): Promise<Movie[]> => {
   const res = await axiosInstance.get("/movies");
   return res.data;
 };

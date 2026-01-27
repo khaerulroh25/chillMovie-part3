@@ -12,12 +12,13 @@ type Movie = {
 };
 
 export default function HomePage() {
-  const handleAddToMyList = async (movie: Movie) => {
-    await addMovie({
+  const handleAddToMyList = async (movie: Movie): Promise<string> => {
+    const newMovie = await addMovie({
       title: "Top Rating Movie",
       poster: movie.poster,
       watched: false,
     });
+    return newMovie.id;
   };
   return (
     <div className="bg-black text-white font-sans md:w-[1440px] md:h-[2890px]">
