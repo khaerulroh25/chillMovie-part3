@@ -1,3 +1,4 @@
+import { addMovie } from "../../services/api/movieApi";
 import Navbar from "../components/organisms/Navbar";
 import HeroSection from "../components/organisms/HeroSection";
 import ContinueWatchingSection from "../components/organisms/ContinueWatchingSection";
@@ -6,24 +7,26 @@ import TopTrandingSection from "../components/organisms/TopTrandingSection";
 import TopRilisSection from "../components/organisms/TopRilisSection";
 import Footer from "../components/organisms/Footer";
 type Movie = {
-  id: number;
-  image: string;
-  isWatched?: boolean;
+  id: string;
+  poster: string;
 };
 
-interface HomePageProps {
-  myList: Movie[];
-  onAddToMyList: (movie: Movie) => void;
-}
-export default function HomePage({ myList, onAddToMyList }: HomePageProps) {
+export default function HomePage() {
+  const handleAddToMyList = async (movie: Movie) => {
+    await addMovie({
+      title: "Top Rating Movie",
+      poster: movie.poster,
+      watched: false,
+    });
+  };
   return (
     <div className="bg-black text-white font-sans md:w-[1440px] md:h-[2890px]">
       <Navbar />
       <HeroSection />
       <ContinueWatchingSection />
-      <TopRatingSection myList={myList} onAddToMyList={onAddToMyList} />
-      <TopTrandingSection myList={myList} onAddToMyList={onAddToMyList} />
-      <TopRilisSection myList={myList} onAddToMyList={onAddToMyList} />
+      <TopRatingSection onAddToMyList={handleAddToMyList} />
+      <TopTrandingSection onAddToMyList={handleAddToMyList} />
+      <TopRilisSection onAddToMyList={handleAddToMyList} />
       <Footer />
     </div>
   );

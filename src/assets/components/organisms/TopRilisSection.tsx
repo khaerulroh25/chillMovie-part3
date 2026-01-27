@@ -10,17 +10,15 @@ import img5 from "../../img/movies/image216.png";
 import arrowLeft from "../../img/icons/arrow-left.png";
 import arrowRight from "../../img/icons/arrow-right.png";
 type Movie = {
-  id: number;
-  image: string;
+  id: string;
+  poster: string;
 };
 
 interface TopRilisSectionProps {
-  myList: Movie[];
   onAddToMyList: (movie: Movie) => void;
 }
 
 export default function TopRatingSection({
-  myList,
   onAddToMyList,
 }: TopRilisSectionProps) {
   return (
@@ -63,39 +61,30 @@ export default function TopRatingSection({
           "
         >
           <TopRatingCard
-            id={6}
-            image={img1}
+            id="top-6"
+            poster={img1}
             badge="top10"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
           <TopRatingCard
-            id={7}
-            image={img2}
+            id="top-7"
+            poster={img2}
             badge="episode"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
           <TopRatingCard
-            id={8}
-            image={img3}
+            id="8"
+            poster={img3}
             badge="top10"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
           <TopRatingCard
-            id={9}
-            image={img4}
+            id="top-9"
+            poster={img4}
             badge="episode"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
-          <TopRatingCard
-            id={10}
-            image={img5}
-            myList={myList}
-            onAddToMyList={onAddToMyList}
-          />
+          <TopRatingCard id="10" poster={img5} onAddToMyList={onAddToMyList} />
         </div>
 
         <Button

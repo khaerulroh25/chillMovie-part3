@@ -11,16 +11,14 @@ import arrowLeft from "../../img/icons/arrow-left.png";
 import arrowRight from "../../img/icons/arrow-right.png";
 
 type Movie = {
-  id: number;
-  image: string;
+  id: string;
+  poster: string;
 };
 
 interface TopTrandingSectionProps {
-  myList: Movie[];
   onAddToMyList: (movie: Movie) => void;
 }
 export default function TopRatingSection({
-  myList = [],
   onAddToMyList,
 }: TopTrandingSectionProps) {
   return (
@@ -63,38 +61,33 @@ export default function TopRatingSection({
           "
         >
           <TopRatingCard
-            id={11}
-            image={img1}
+            id="top-11"
+            poster={img1}
             badge="top10"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
           <TopRatingCard
-            id={12}
-            image={img2}
+            id="top-12"
+            poster={img2}
             badge="top10"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
           <TopRatingCard
-            id={13}
-            image={img3}
+            id="top-13"
+            poster={img3}
             badge="top10"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
           <TopRatingCard
-            id={14}
-            image={img4}
+            id="top-14"
+            poster={img4}
             badge="top10"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
           <TopRatingCard
-            id={15}
-            image={img5}
+            id="top-15"
+            poster={img5}
             badge="top10"
-            myList={myList}
             onAddToMyList={onAddToMyList}
           />
         </div>

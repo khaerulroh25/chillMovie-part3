@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Button from "../atoms/Buttons";
 import playIcon from "../../img/icons/vector.png";
 import checkIcon from "../../img/icons/check.png";
@@ -5,13 +7,13 @@ import chevronIcon from "../../img/icons/chevron-down.png";
 import addIcon from "../../img/icons/plus.png";
 
 type Movie = {
-  id: number;
-  image: string;
+  id: string;
+  poster: string;
 };
 
 interface TopRatingCardProps {
-  id: number;
-  image: string;
+  id: string;
+  poster: string;
   badge?: "episode" | "top10";
   myList?: Movie[];
   onAddToMyList: (movie: Movie) => void;
@@ -19,12 +21,12 @@ interface TopRatingCardProps {
 
 export default function TopRatingCard({
   id,
-  image,
+  poster,
   badge,
-  myList = [],
   onAddToMyList,
 }: TopRatingCardProps) {
-  const isAdded = myList.some((item) => item.id === id);
+  const [added, setAdded] = useState(false);
+
   return (
     <div className="relative shrink-0">
       <div
@@ -41,7 +43,7 @@ export default function TopRatingCard({
       "
       >
         <img
-          src={image}
+          src={poster}
           alt=""
           className="w-full h-full object-cover rounded-[4px]"
         />
@@ -71,7 +73,7 @@ export default function TopRatingCard({
           z-50
         "
         >
-          <img src={image} className="w-[408px] h-[255px] object-cover" />
+          <img src={poster} className="w-[408px] h-[255px] object-cover" />
 
           <div className="gap-3 p-4 md:gap-[17px] md:p-[29px] ">
             <div className="flex items-center  gap-4 mb-4">
@@ -88,11 +90,14 @@ export default function TopRatingCard({
 
               <Button
                 variant="icon"
-                onClick={() => onAddToMyList({ id, image })}
+                onClick={async () => {
+                  await onAddToMyList({ id, poster });
+                  setAdded(true);
+                }}
                 className=" border border-white/30 hover:bg-white/10 p-2 md:p-3"
               >
                 <img
-                  src={isAdded ? checkIcon : addIcon}
+                  src={added ? checkIcon : addIcon}
                   alt="Tambah"
                   className="md:w-4 md:h-4 w-3 h-3"
                 />

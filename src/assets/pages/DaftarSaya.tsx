@@ -2,23 +2,41 @@ import Navbar from "../components/organisms/Navbar";
 import Footer from "../components/organisms/Footer";
 import Button from "../components/atoms/Buttons";
 
+import { useEffect, useState } from "react";
+import {
+  deleteMovie,
+  getMovies,
+  updateMovie,
+} from "../../services/api/movieApi";
+
 type Movie = {
-  id: number;
-  image: string;
-  isWatched?: boolean;
+  id: string;
+  poster: string;
+  watched?: boolean;
 };
 
-interface DaftarSayaProps {
-  myList: Movie[];
-  onRemove: (id: number) => void;
-  onToggleWatched: (id: number) => void;
-}
+export default function DaftarSaya() {
+  const [myList, setMyList] = useState<Movie[]>([]);
+  useEffect(() => {
+    getMovies().then((data) => {
+      setMyList(data);
+    });
+  }, []);
 
-export default function DaftarSaya({
-  myList,
-  onRemove,
-  onToggleWatched,
-}: DaftarSayaProps) {
+  const handleRemove = async (id: string) => {
+    await deleteMovie(id);
+    setMyList((prev) => prev.filter((movie) => movie.id !== id));
+  };
+
+  const handleToggleWatched = async (movie: Movie) => {
+    await updateMovie(movie.id, {
+      watched: !movie.watched,
+    });
+    setMyList((prev) =>
+      prev.map((m) => (m.id === movie.id ? { ...m, watched: !m.watched } : m)),
+    );
+  };
+
   return (
     <div className="min-h-screen bg-black text-white font-sans">
       <Navbar />
@@ -86,7 +104,7 @@ export default function DaftarSaya({
                     "
               >
                 <img
-                  src={movie.image}
+                  src={movie.poster}
                   alt=""
                   className="w-full h-full object-cover"
                 />
@@ -106,7 +124,7 @@ export default function DaftarSaya({
                 >
                   <Button
                     variant="icon"
-                    onClick={() => onRemove(movie.id)}
+                    onClick={() => handleRemove(movie.id)}
                     className="group
                                bg-transparent
                                border-[2px]
@@ -141,7 +159,7 @@ export default function DaftarSaya({
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() => onToggleWatched(movie.id)}
+                    onClick={() => handleToggleWatched(movie)}
                     className="
                                 md:w-[160px]
                                 md:h-[50px]
@@ -155,7 +173,7 @@ export default function DaftarSaya({
                                 hover:bg-white/20
                             "
                   >
-                    {movie.isWatched ? "Sudah Ditonton" : "Belum Ditonton"}
+                    {movie.watched ? "Sudah Ditonton" : "Belum Ditonton"}
                   </Button>
                 </div>
               </div>
