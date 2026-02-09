@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { deleteMovie } from "../../../services/api/movieApi";
 import { getMovies } from "../../../services/api/movieApi";
-
+import MovieDetailModal from "./MoviedetailModal";
 import Button from "../atoms/Buttons";
 import playIcon from "../../img/icons/vector.png";
 import checkIcon from "../../img/icons/check.png";
@@ -29,6 +29,7 @@ export default function TopRatingCard({
 }: TopRatingCardProps) {
   const [added, setAdded] = useState(false);
   const [apiId, setApiId] = useState<string | null>(null);
+  const [openDetail, setOpenDetail] = useState(false);
 
   useEffect(() => {
     const syncWithApi = async () => {
@@ -129,6 +130,7 @@ export default function TopRatingCard({
 
               <Button
                 variant="icon"
+                onClick={() => setOpenDetail(true)}
                 className=" ml-auto border border-white/30 hover:bg-white/10 p-2 md:p-3"
               >
                 <img
@@ -170,6 +172,13 @@ export default function TopRatingCard({
           </div>
         )}
       </div>
+
+      <MovieDetailModal
+        open={openDetail}
+        onClose={() => setOpenDetail(false)}
+        poster={poster}
+        title="Ted Lasso"
+      />
     </div>
   );
 }
